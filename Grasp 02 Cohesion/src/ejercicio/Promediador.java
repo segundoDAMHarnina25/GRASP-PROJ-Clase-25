@@ -5,4 +5,3 @@ public class Promediador {
 		return (float)suma/cantidad;
 	}
 }
-S

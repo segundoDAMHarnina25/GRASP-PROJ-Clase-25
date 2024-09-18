@@ -7,7 +7,5 @@ public static void main(String[] args) {
 	oBarMal.secondMethod();
 	oBarMal.oneMethod();
 	oBarMal.twoMethod();
-	//no accede al metodo firstMethod
-	
 }
 }

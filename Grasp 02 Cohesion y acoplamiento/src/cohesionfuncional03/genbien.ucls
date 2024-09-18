@@ -1,27 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <class-diagram version="1.2.4" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
   associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
-  <class id="1" language="java" name="CohesionFuncional02.bien.OtherObject" project="Grasp 02 Cohesion" 
-    file="/Grasp 02 Cohesion/src/CohesionFuncional02/bien/OtherObject.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="241" y="197"/>    
+  <class id="1" language="java" name="cohesionfuncional03.OtherObject" project="Grasp 02 Cohesion y acoplamiento" 
+    file="/Grasp 02 Cohesion y acoplamiento/src/cohesionfuncional03/OtherObject.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="302" y="126"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="false" package="false" protected="false" private="false" static="false"/>      
       <operations public="false" package="false" protected="false" private="false" static="false"/>    
     </display>  
   </class>  
-  <class id="2" language="java" name="CohesionFuncional02.bien.SomeObject" project="Grasp 02 Cohesion" 
-    file="/Grasp 02 Cohesion/src/CohesionFuncional02/bien/SomeObject.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="235" y="360"/>    
+  <class id="2" language="java" name="cohesionfuncional03.SomeObject" project="Grasp 02 Cohesion y acoplamiento" 
+    file="/Grasp 02 Cohesion y acoplamiento/src/cohesionfuncional03/SomeObject.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="281" y="438"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="false" package="false" protected="false" private="false" static="false"/>      
       <operations public="false" package="false" protected="false" private="false" static="false"/>    
     </display>  
   </class>  
-  <class id="3" language="java" name="CohesionFuncional02.bien.UsoMal" project="Grasp 02 Cohesion" 
-    file="/Grasp 02 Cohesion/src/CohesionFuncional02/bien/UsoMal.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="66" width="179" x="589" y="227"/>    
+  <class id="3" language="java" name="cohesionfuncional03.UsoBien" project="Grasp 02 Cohesion y acoplamiento" 
+    file="/Grasp 02 Cohesion y acoplamiento/src/cohesionfuncional03/UsoBien.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="66" width="140" x="569" y="231"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="false" package="false" protected="false" private="false" static="false"/>      
@@ -30,11 +32,11 @@
   </class>  
   <dependency id="4">    
     <end type="SOURCE" refId="3"/>    
-    <end type="TARGET" refId="1"/>  
+    <end type="TARGET" refId="2"/>  
   </dependency>  
   <dependency id="5">    
     <end type="SOURCE" refId="3"/>    
-    <end type="TARGET" refId="2"/>  
+    <end type="TARGET" refId="1"/>  
   </dependency>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
     sort-features="false" accessors="true" visibility="true">    

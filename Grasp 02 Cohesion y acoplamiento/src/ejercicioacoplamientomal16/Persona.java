@@ -14,12 +14,11 @@ public class Persona {
 	public void imprimirInformacion() {
 		System.out.println("Nombre: " + nombre);
 		System.out.println("Edad: " + edad);
-		System.out.println("Direccion: " + direccion.getCalle() + ", " + direccion.getCiudad() + ", "
-				+ direccion.getEstado() + ", " + direccion.getCodigoPostal());
+		System.out.println(direccion.getDireccion());
 
 	}
 
 	public boolean isInSameStreet(Direccion direccion) {
-		return direccion.getCalle().equals(this.direccion.getCalle());
+		return this.direccion.inSameStreet(direccion);
 	}
 }

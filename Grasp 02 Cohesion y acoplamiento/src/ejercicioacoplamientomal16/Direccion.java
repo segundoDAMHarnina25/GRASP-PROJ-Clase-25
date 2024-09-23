@@ -13,6 +13,10 @@ public class Direccion {
         this.codigoPostal = codigoPostal;
     }
 
+    public String getDireccion() {
+    	return "Direccion: " + getCalle() + ", " + getCiudad() + ", "
+				+ getEstado() + ", " + getCodigoPostal();
+    }
 	public String getCalle() {
 		return calle;
 	}
@@ -43,6 +47,10 @@ public class Direccion {
 
 	public void setCodigoPostal(String codigoPostal) {
 		this.codigoPostal = codigoPostal;
+	}
+
+	public boolean inSameStreet(Direccion direccion) {
+		return getCalle().equals(direccion.getCalle());
 	}
 	
 

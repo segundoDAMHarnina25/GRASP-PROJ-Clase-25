@@ -15,7 +15,8 @@ public class Persona {
 		System.out.println("Nombre: " + nombre);
 		System.out.println("Edad: " + edad);
 		System.out.println(direccion.getDireccion());
-
+		//Envidia de caracteristicas
+//		System.out.println("Direccion "+direccion.getCalle()+" "+direccion.getCiudad()+direccion.getCodigoPostal());
 	}
 
 	public boolean isInSameStreet(Direccion direccion) {

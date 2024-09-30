@@ -2,22 +2,24 @@ package modelo.dominio;
 
 import java.util.Objects;
 
-public class Persona {
-	private String dNICliente;
+import modelo.repositorios.Keyable;
+
+public class Persona implements Keyable<String> {
+	private String dni;
 	private String nombre;
 	
 	public Persona(String dNICliente, String nombre) {
 		super();
-		this.dNICliente = dNICliente;
+		this.dni = dNICliente;
 		this.nombre = nombre;
 	}
 
-	public String getdNICliente() {
-		return dNICliente;
+	public String getDni() {
+		return dni;
 	}
 
-	public void setdNICliente(String dNICliente) {
-		this.dNICliente = dNICliente;
+	public void setDni(String dni) {
+		this.dni = dni;
 	}
 
 	public String getNombre() {
@@ -30,7 +32,7 @@ public class Persona {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(dNICliente);
+		return Objects.hash(dni);
 	}
 
 	@Override
@@ -42,7 +44,12 @@ public class Persona {
 		if (getClass() != obj.getClass())
 			return false;
 		Persona other = (Persona) obj;
-		return Objects.equals(dNICliente, other.dNICliente);
+		return Objects.equals(dni, other.dni);
+	}
+
+	@Override
+	public boolean equalKey(String keyable) {
+		return this.getDni().equals(keyable);
 	}
 	
 }

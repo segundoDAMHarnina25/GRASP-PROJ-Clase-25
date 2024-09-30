@@ -4,8 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import modelo.dominio.Persona;
+import modelo.repositorios.Populable;
 
-public class PersonaMother {
+public class PersonaMother implements Populable<Persona> {
 
     // Método para obtener una lista de 15 personas
     public static List<Persona> crearVariasPersonas() {
@@ -29,4 +30,10 @@ public class PersonaMother {
 
         return personas;
     }
+
+	@Override
+	public List<Persona> getElementos() {
+		
+		return crearVariasPersonas();
+	}
 }

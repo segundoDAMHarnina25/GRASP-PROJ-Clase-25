@@ -9,7 +9,7 @@ import modelo.repositorios.Populable;
 public class PersonaMother implements Populable<Persona> {
 
     // Método para obtener una lista de 15 personas
-    public static List<Persona> crearVariasPersonas() {
+    public  List<Persona> crearVariasPersonas() {
         List<Persona> personas = new ArrayList<>();
 
         personas.add(new Persona("12345678A", "Juan Pérez"));

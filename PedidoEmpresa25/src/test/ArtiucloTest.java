@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import modelo.dominio.Articulo;
 import modelo.dominio.Persona;
+import modelo.dominio.Vendedor;
 import modelo.repositorios.RepositorioLista;
 import modelo.repositorios.om.PersonaMother;
 
@@ -17,6 +18,7 @@ class ArtiucloTest {
 //		RepositorioLista<Persona,String> personaRepositorioLista=new RepositorioLista();
 		RepositorioLista<Persona,String> personaRepositorioListaOM=new RepositorioLista(new PersonaMother());
 		assertNotNull(personaRepositorioListaOM.getByKey("12345678A").get());
+		RepositorioLista<Vendedor,String> vende=new RepositorioLista(null);
 	}
 
 }

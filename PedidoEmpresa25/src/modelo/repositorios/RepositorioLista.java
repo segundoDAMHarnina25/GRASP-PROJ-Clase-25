@@ -21,9 +21,11 @@ public class RepositorioLista<T extends Keyable<S>, S> implements Repository<T, 
 
 	@Override
 	public Optional<T> getByKey(S key) {
-		return elementos.stream().filter((elemento) -> {
-			return (elemento).equalKey(key);
-		}).findFirst();
+		return elementos.stream()
+				.filter((elemento) 
+						-> {
+							return elemento.equalKey(key);})
+				.findFirst();
 	}
 
 	@Override

@@ -1,4 +1,4 @@
-package modelo.repositorios;
+package test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -7,6 +7,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import modelo.dominio.Persona;
+import modelo.repositorios.RepositorioLista;
 import modelo.repositorios.om.PersonaMother;
 
 class RepositorioListaTest {
@@ -22,11 +23,11 @@ class RepositorioListaTest {
 
 	@Test
 	void testAdd() {
-		int sizeAnterior = personaRepositorioListaOM.elementos.size();
+		int sizeAnterior = personaRepositorioListaOM.getElementos().size();
 		Persona nuevaPersona = new Persona("888888","Ancleto");
 		assertTrue(personaRepositorioListaOM.getByKey(nuevaPersona.getDni()).isEmpty());
 		assertTrue(personaRepositorioListaOM.add(nuevaPersona));
-		assertEquals(sizeAnterior+1,personaRepositorioListaOM.elementos.size());
+		assertEquals(sizeAnterior+1,personaRepositorioListaOM.getElementos().size());
 	}
 
 	@Test

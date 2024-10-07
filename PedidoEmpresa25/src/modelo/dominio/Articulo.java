@@ -1,8 +1,9 @@
 package modelo.dominio;
 
+import modelo.repositorios.KeyAccesible;
 import modelo.repositorios.Keyable;
 
-public class Articulo implements Keyable<Long> {
+public class Articulo implements KeyAccesible<Long> {
 	private Long id;
 	private String descripcion;
 	private float precio;
@@ -35,6 +36,11 @@ public class Articulo implements Keyable<Long> {
 	public boolean equalKey(Long keyable) {
 		return this.id==keyable;
 	}
+	@Override
+	public Long getKey() {
+		return this.getId();
+	}
+	
 
 	
 	

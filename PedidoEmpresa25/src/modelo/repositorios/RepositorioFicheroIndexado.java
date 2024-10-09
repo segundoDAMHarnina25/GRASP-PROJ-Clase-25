@@ -17,13 +17,14 @@ public class RepositorioFicheroIndexado <T extends KeyAccesible<S>, S> implement
 	private AccesibleUnicoObjeto<Map<S, Long>> accesoSerializadoUnicoObjeto;
 	private AccesibleMultiObjeto<T> accesoSerializadoAleatorioMultiObjeto;
 	
-	public RepositorioFicheroIndexado(String pathFolder) throws NotFolderPath, IndexNotAccsibleException  {
+	public RepositorioFicheroIndexado(String pathFolder,AccesibleMultiObjeto<T> accesoSerializadoAleatorioMultiObjeto) throws NotFolderPath, IndexNotAccsibleException  {
 		super();
 		this.pathFolder = pathFolder;
 		checkPath(pathFolder);
 		createPaths();
 		if(!loadIndex()) throw new IndexNotAccsibleException();
-		accesoSerializadoAleatorioMultiObjeto = new AccesoAleatorioFicheroSerializadoMultiObjeto<>(objectFile);
+		this.accesoSerializadoAleatorioMultiObjeto=accesoSerializadoAleatorioMultiObjeto;
+		this.accesoSerializadoAleatorioMultiObjeto.setPath(objectFile);
 	}
 
 	private void createPaths() {

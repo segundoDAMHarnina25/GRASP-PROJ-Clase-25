@@ -16,6 +16,8 @@ import org.junit.jupiter.api.Test;
 import exceptions.IndexNotAccsibleException;
 import exceptions.NotFolderPath;
 import modelo.dominio.Articulo;
+import modelo.repositorios.AccesoAleatorioFicheroSerializadoMultiObjeto;
+import modelo.repositorios.AccesoSecuencialFicheroSerializadoMultiObjeto;
 import modelo.repositorios.RepositorioFicheroIndexado;
 import modelo.repositorios.Repository;
 
@@ -31,7 +33,10 @@ class RepositorioFicheroIndexadoTest {
 	void before() {
 		try {
 			repositorioFicheroIndexado=
-					new RepositorioFicheroIndexado<Articulo,Long>(pathFolder);
+					new RepositorioFicheroIndexado<Articulo,Long>(pathFolder
+							,new AccesoAleatorioFicheroSerializadoMultiObjeto<Articulo>());
+			Repository<Articulo,Long> repositorioFicheroIndexadoDos=new RepositorioFicheroIndexado(pathFolder
+					,new AccesoSecuencialFicheroSerializadoMultiObjeto<Articulo>());
 		} catch (NotFolderPath e) {
 			e.printStackTrace();
 		} catch (IndexNotAccsibleException e) {

@@ -1,6 +1,7 @@
 package modelo.repositorios;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -9,22 +10,24 @@ import java.util.Optional;
 import exceptions.IndexNotAccsibleException;
 import exceptions.NotFolderPath;
 
-public class RepositorioFicheroIndexado <T extends KeyAccesible<S>, S> implements Repository<T, S> {
-	
+public class RepositorioFicheroIndexado<T extends KeyAccesible<S>, S> implements Repository<T, S> {
+
 	private String pathFolder;
 	private String indexFile, objectFile;
 	private Map<S, Long> index;
-	private AccesibleUnicoObjeto<Map<S, Long>> accesoSerializadoUnicoObjeto;
-	private AccesibleMultiObjeto<T> accesoSerializadoAleatorioMultiObjeto;
-	
-	public RepositorioFicheroIndexado(String pathFolder,AccesibleMultiObjeto<T> accesoSerializadoAleatorioMultiObjeto) throws NotFolderPath, IndexNotAccsibleException  {
+	private AccesibleUnicoObjeto<Map<S, Long>> accesoUnicoObjeto;
+	private AccesibleMultiObjeto<T> accesoMultiObjeto;
+
+	public RepositorioFicheroIndexado(String pathFolder, AccesibleMultiObjeto<T> accesoMultiObjeto)
+			throws NotFolderPath, IndexNotAccsibleException {
 		super();
 		this.pathFolder = pathFolder;
 		checkPath(pathFolder);
 		createPaths();
-		if(!loadIndex()) throw new IndexNotAccsibleException();
-		this.accesoSerializadoAleatorioMultiObjeto=accesoSerializadoAleatorioMultiObjeto;
-		this.accesoSerializadoAleatorioMultiObjeto.setPath(objectFile);
+		if (!loadIndex())
+			throw new IndexNotAccsibleException();
+		this.accesoMultiObjeto = accesoMultiObjeto;
+		this.accesoMultiObjeto.setPath(objectFile);
 	}
 
 	private void createPaths() {
@@ -34,9 +37,10 @@ public class RepositorioFicheroIndexado <T extends KeyAccesible<S>, S> implement
 
 	private boolean loadIndex() {
 		try {
-			accesoSerializadoUnicoObjeto = new AccesoFicheroSerializadoUnicoObjeto<Map<S, Long>>(indexFile);
-			index = accesoSerializadoUnicoObjeto.load().orElse(new HashMap<>());
-			if(index.size()==0) accesoSerializadoUnicoObjeto.save(index);
+			accesoUnicoObjeto = new AccesoFicheroSerializadoUnicoObjeto<Map<S, Long>>(indexFile);
+			index = accesoUnicoObjeto.load().orElse(new HashMap<>());
+			if (index.size() == 0)
+				accesoUnicoObjeto.save(index);
 			return true;
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
@@ -59,25 +63,52 @@ public class RepositorioFicheroIndexado <T extends KeyAccesible<S>, S> implement
 
 	@Override
 	public boolean add(T objeto) {
-		// TODO Auto-generated method stub
+		if (index.containsKey(objeto.getKey()))
+			return false;
+		Long save = accesoMultiObjeto.save(objeto);
+		if (save == -1) {
+			return undoingChanges();
+		}
+		index.put(objeto.getKey(), save);
+		try {
+			accesoUnicoObjeto.save(index);
+		} catch (Exception e) {
+			index.remove(objeto.getKey());
+			return undoingChanges();
+		}
+		return true;
+	}
+
+	private boolean undoingChanges() {
+		accesoMultiObjeto.undo();
 		return false;
 	}
 
 	@Override
 	public Optional<T> getByKey(S key) {
-		// TODO Auto-generated method stub
+		Long long1 = index.get(key);
+		if (long1 != null) {
+			return accesoMultiObjeto.load(long1);
+		}
 		return Optional.empty();
 	}
 
 	@Override
 	public boolean update(T objeto) {
-		// TODO Auto-generated method stub
+		Optional<T> delete = delete(objeto.getKey());
+		if(delete.isPresent()) {
+			return add(objeto);
+		}
 		return false;
 	}
 
 	@Override
 	public Optional<T> delete(S key) {
-		// TODO Auto-generated method stub
+		Optional<T> byKey = getByKey(key);
+		if(byKey.isPresent()) {
+			index.remove(key);
+			return byKey;
+		}
 		return Optional.empty();
 	}
 
